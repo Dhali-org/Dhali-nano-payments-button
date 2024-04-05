@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         </div>
                         <div class="field">
                             <div class="control has-text-centered">
-                                <button class="button is-primary" id="form-submit">Register interest</button>
+                                <button class="button is-primary" id="form-submit-nano-payments">Register interest</button>
                             </div>
                         </div>
                     </div>
@@ -71,6 +71,64 @@ loadScriptsSequentially(scriptsToLoad, 0, function() {
     initializeFirebase();
 });
 
+document.head.insertAdjacentHTML('beforeend', `
+    <style>
+        .centered-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+        .modal {
+            display: none;
+        }
+        .modal.is-active {
+            display: flex;
+        }
+        #snackbar-success-nano-payments, #snackbar-fail-nano-payments {
+            visibility: hidden;
+            min-width: 250px;
+            margin-left: -125px;
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            border-radius: 2px;
+            padding: 16px;
+            position: fixed;
+            z-index: 1;
+            left: 50%;
+            bottom: 30px;
+            font-size: 17px;
+        }
+
+        #snackbar-success-nano-payments.show, #snackbar-fail-nano-payments.show {
+            visibility: visible;
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        @-webkit-keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+            from {bottom: 0; opacity: 0;}
+            to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+            from {bottom: 30px; opacity: 1;}
+            to {bottom: 0; opacity: 0;}
+        }
+    </style>
+`);
+
 document.body.insertAdjacentHTML('beforeend', htmlContent);
 // Initialize Firebase in your existing script.
 // Add this JavaScript to handle the modal opening and closing.
@@ -94,7 +152,7 @@ function initializeFirebase() {
     var appEmail = firebase.initializeApp(firebaseEmailConfig);
     var dbEmail = firebase.firestore(appEmail)
     const collectionEmails = dbEmail.collection("emails-from-ads")
-    let submitButtonEmails = document.getElementById("form-submit")
+    let submitButtonEmails = document.getElementById("form-submit-nano-payments")
     submitButtonEmails.addEventListener("click", (e) => {
         e.preventDefault()
         let email = document.getElementById("email-nano-payments").value

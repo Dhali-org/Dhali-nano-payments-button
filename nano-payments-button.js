@@ -124,78 +124,78 @@ var NanoPayments = (function() {
         document.addEventListener('DOMContentLoaded', function () {
 
 
-        loadScriptsSequentially(scriptsToLoad, 0, function() {
-            // All scripts have loaded, now initialize Firebase
-            initializeFirebase();
-        });
+            loadScriptsSequentially(scriptsToLoad, 0, function() {
+                // All scripts have loaded, now initialize Firebase
+                initializeFirebase();
+            });
 
-        loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
+            loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
 
-        document.head.insertAdjacentHTML('beforeend', `
-            <style>
-                .centered-container {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 100%;
-                }
-                .modal {
-                    display: none;
-                }
-                .modal.is-active {
-                    display: flex;
-                }
-                #snackbar-success-nano-payments, #snackbar-fail-nano-payments {
-                    visibility: hidden;
-                    min-width: 250px;
-                    margin-left: -125px;
-                    background-color: #333;
-                    color: #fff;
-                    text-align: center;
-                    border-radius: 2px;
-                    padding: 16px;
-                    position: fixed;
-                    z-index: 1;
-                    left: 50%;
-                    bottom: 30px;
-                    font-size: 17px;
-                }
+            document.head.insertAdjacentHTML('beforeend', `
+                <style>
+                    .centered-container {
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 100%;
+                    }
+                    .modal {
+                        display: none;
+                    }
+                    .modal.is-active {
+                        display: flex;
+                    }
+                    #snackbar-success-nano-payments, #snackbar-fail-nano-payments {
+                        visibility: hidden;
+                        min-width: 250px;
+                        margin-left: -125px;
+                        background-color: #333;
+                        color: #fff;
+                        text-align: center;
+                        border-radius: 2px;
+                        padding: 16px;
+                        position: fixed;
+                        z-index: 1;
+                        left: 50%;
+                        bottom: 30px;
+                        font-size: 17px;
+                    }
 
-                #snackbar-success-nano-payments.show, #snackbar-fail-nano-payments.show {
-                    visibility: visible;
-                    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-                    animation: fadein 0.5s, fadeout 0.5s 2.5s;
-                }
+                    #snackbar-success-nano-payments.show, #snackbar-fail-nano-payments.show {
+                        visibility: visible;
+                        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+                    }
 
-                @-webkit-keyframes fadein {
-                    from {bottom: 0; opacity: 0;}
-                    to {bottom: 30px; opacity: 1;}
-                }
+                    @-webkit-keyframes fadein {
+                        from {bottom: 0; opacity: 0;}
+                        to {bottom: 30px; opacity: 1;}
+                    }
 
-                @keyframes fadein {
-                    from {bottom: 0; opacity: 0;}
-                    to {bottom: 30px; opacity: 1;}
-                }
+                    @keyframes fadein {
+                        from {bottom: 0; opacity: 0;}
+                        to {bottom: 30px; opacity: 1;}
+                    }
 
-                @-webkit-keyframes fadeout {
-                    from {bottom: 30px; opacity: 1;}
-                    to {bottom: 0; opacity: 0;}
-                }
+                    @-webkit-keyframes fadeout {
+                        from {bottom: 30px; opacity: 1;}
+                        to {bottom: 0; opacity: 0;}
+                    }
 
-                @keyframes fadeout {
-                    from {bottom: 30px; opacity: 1;}
-                    to {bottom: 0; opacity: 0;}
-                }
-            </style>
-        `);
+                    @keyframes fadeout {
+                        from {bottom: 30px; opacity: 1;}
+                        to {bottom: 0; opacity: 0;}
+                    }
+                </style>
+            `);
 
-        document.body.insertAdjacentHTML('beforeend', htmlContent);
+            document.body.insertAdjacentHTML('beforeend', htmlContent);
         });
     }
 
     return {
         init: init,
-        openModal: openModal, // Ensure this is exposed
+        openModal: openModal,
         closeModal: closeModal
     };
 })();

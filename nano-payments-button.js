@@ -1,15 +1,11 @@
 var NanoPayments = (function() {
-    var htmlContent = `
-    <div class="centered-container">
-        <button class="button is-primary" id="open-modal-btn-nano-payments">Pay with Nano-Payments</button>
-    </div>
-        
+    var htmlContent = `        
     <div class="modal" id="email-modal-nano-payments">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Get updates on nano-payment option</p>
-                <button class="delete" aria-label="close" id="close-modal-btn"></button>
+                <button class="delete" aria-label="close" id="close-modal-btn" onclick="NanoPayments.closeModal()"></button>
             </header>
             <section class="modal-card-body">
                 <div class="content-wrapper">
@@ -101,6 +97,14 @@ var NanoPayments = (function() {
             }
     })}
 
+    function openModal() {
+        document.getElementById('email-modal-nano-payments').classList.add('is-active');
+    }
+
+    function closeModal() {
+        document.getElementById('email-modal-nano-payments').classList.remove('is-active');
+    }
+
     var scriptsToLoad = [
         "https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js",
         "https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js",
@@ -176,22 +180,13 @@ var NanoPayments = (function() {
         `);
 
         document.body.insertAdjacentHTML('beforeend', htmlContent);
-        // Initialize Firebase in your existing script.
-        // Add this JavaScript to handle the modal opening and closing.
-        document.getElementById('open-modal-btn-nano-payments').addEventListener('click', function() {
-            document.getElementById('email-modal-nano-payments').classList.add('is-active');
-        });
-
-        document.getElementById('close-modal-btn').addEventListener('click', function() {
-            document.getElementById('email-modal-nano-payments').classList.remove('is-active');
-        });
-
-
         });
     }
 
     return {
-        init: init
+        init: init,
+        openModal: openModal, // Ensure this is exposed
+        closeModal: closeModal
     };
 })();
 

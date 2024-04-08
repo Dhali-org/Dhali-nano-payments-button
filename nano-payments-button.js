@@ -92,6 +92,7 @@ var NanoPayments = (function() {
         {
             rootUrl = "default"
         }
+        console.log("rootUrl: " + rootUrl)
         const subCollection = collectionEmails.doc(rootUrl).collection("emails");
 
         subCollection.doc(_UUID).set(

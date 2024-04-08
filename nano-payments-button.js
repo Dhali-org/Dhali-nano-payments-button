@@ -8,16 +8,7 @@ var NanoPayments = (function() {
     }
 
     var _UUID = generateUUID();
-    const _firebaseEmailConfig = {
-        apiKey: "AIzaSyBro8QN3zyJwyo92lYUMPwsyRVPLLGOTcs",
-        authDomain: "dhali-prod.firebaseapp.com",
-        projectId: "dhali-prod",
-        storageBucket: "dhali-prod.appspot.com",
-        messagingSenderId: "1042340549063",
-        appId: "1:1042340549063:web:3dc69cffe6d3c0746189e2",
-    };
-    var _appEmail = firebase.initializeApp(_firebaseEmailConfig);
-    var _db = firebase.firestore(_appEmail)
+    var _db;
 
     var htmlContent = `        
     <div class="modal" id="email-modal-nano-payments">
@@ -149,7 +140,18 @@ var NanoPayments = (function() {
         document.addEventListener('DOMContentLoaded', function () {
 
 
-            loadScriptsSequentially(scriptsToLoad, 0, function() {});
+            loadScriptsSequentially(scriptsToLoad, 0, function() {
+                const _firebaseEmailConfig = {
+                    apiKey: "AIzaSyBro8QN3zyJwyo92lYUMPwsyRVPLLGOTcs",
+                    authDomain: "dhali-prod.firebaseapp.com",
+                    projectId: "dhali-prod",
+                    storageBucket: "dhali-prod.appspot.com",
+                    messagingSenderId: "1042340549063",
+                    appId: "1:1042340549063:web:3dc69cffe6d3c0746189e2",
+                };
+                var _appEmail = firebase.initializeApp(_firebaseEmailConfig);
+                _db = firebase.firestore(_appEmail)
+            });
 
             loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
 

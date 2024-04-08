@@ -18,7 +18,7 @@ var NanoPayments = (function() {
                             </div>
                             <div class="field">
                                 <div class="control has-text-centered">
-                                    <button class="button is-primary" id="form-submit-nano-payments">Register interest</button>
+                                    <button class="button is-primary" id="form-submit-nano-payments"><strong>Register interest</strong></button>
                                 </div>
                             </div>
                         </div>

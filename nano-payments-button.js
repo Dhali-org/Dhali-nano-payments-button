@@ -8,6 +8,16 @@ var NanoPayments = (function() {
     }
 
     var _UUID = generateUUID();
+    const _firebaseEmailConfig = {
+        apiKey: "AIzaSyBro8QN3zyJwyo92lYUMPwsyRVPLLGOTcs",
+        authDomain: "dhali-prod.firebaseapp.com",
+        projectId: "dhali-prod",
+        storageBucket: "dhali-prod.appspot.com",
+        messagingSenderId: "1042340549063",
+        appId: "1:1042340549063:web:3dc69cffe6d3c0746189e2",
+    };
+    var _appEmail = firebase.initializeApp(_firebaseEmailConfig);
+    var _db = firebase.firestore(_appEmail)
 
     var htmlContent = `        
     <div class="modal" id="email-modal-nano-payments">
@@ -73,21 +83,10 @@ var NanoPayments = (function() {
     }
     
     function initializeFirebase() {
-        const firebaseEmailConfig = {
-            apiKey: "AIzaSyBro8QN3zyJwyo92lYUMPwsyRVPLLGOTcs",
-            authDomain: "dhali-prod.firebaseapp.com",
-            projectId: "dhali-prod",
-            storageBucket: "dhali-prod.appspot.com",
-            messagingSenderId: "1042340549063",
-            appId: "1:1042340549063:web:3dc69cffe6d3c0746189e2",
-        };
-        var appEmail = firebase.initializeApp(firebaseEmailConfig);
-        var dbEmail = firebase.firestore(appEmail)
-
         var hostname = window.location.hostname;
         var rootUrl = hostname.split('.')[0];
 
-        const collectionEmails = dbEmail.collection("emails-from-ads")
+        const collectionEmails = _db.collection("emails-from-ads")
         if (rootUrl == "")
         {
             rootUrl = "default"
@@ -147,7 +146,6 @@ var NanoPayments = (function() {
     ];
 
     function init() {
-
         document.addEventListener('DOMContentLoaded', function () {
 
 

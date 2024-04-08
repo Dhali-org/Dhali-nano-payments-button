@@ -1,4 +1,14 @@
 var NanoPayments = (function() {
+
+    function generateUUID() {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+            var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+            return v.toString(16);
+        });
+    }
+
+    var _UUID = generateUUID();
+
     var htmlContent = `        
     <div class="modal" id="email-modal-nano-payments">
         <div class="modal-background"></div>
@@ -73,17 +83,32 @@ var NanoPayments = (function() {
         };
         var appEmail = firebase.initializeApp(firebaseEmailConfig);
         var dbEmail = firebase.firestore(appEmail)
+
+        var hostname = window.location.hostname;
+        var rootUrl = hostname.split('.')[0];
+
         const collectionEmails = dbEmail.collection("emails-from-ads")
+        if (rootUrl == "")
+        {
+            rootUrl = "default"
+        }
+        const subCollection = collectionEmails.doc(rootUrl).collection("emails");
+
+        subCollection.doc(_UUID).set(
+            {
+                date: new Date(),
+            }
+        )
+
         let submitButtonEmails = document.getElementById("form-submit-nano-payments")
         submitButtonEmails.addEventListener("click", (e) => {
             e.preventDefault()
             let email = document.getElementById("email-nano-payments").value
             var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
             if (email.match(mailformat)) {
-            collectionEmails.doc().set(
+                subCollection.doc(_UUID).update(
                 {
-                email: email,
-                date: new Date(),
+                    email: email,
                 }
             )
             document.getElementById("email-nano-payments").value = ""
@@ -106,6 +131,7 @@ var NanoPayments = (function() {
     })}
 
     function openModal() {
+        initializeFirebase();
         document.getElementById('email-modal-nano-payments').classList.add('is-active');
     }
 
@@ -124,10 +150,7 @@ var NanoPayments = (function() {
         document.addEventListener('DOMContentLoaded', function () {
 
 
-            loadScriptsSequentially(scriptsToLoad, 0, function() {
-                // All scripts have loaded, now initialize Firebase
-                initializeFirebase();
-            });
+            loadScriptsSequentially(scriptsToLoad, 0, function() {});
 
             loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
 

@@ -54,6 +54,14 @@ var NanoPayments = (function() {
         }
     }
 
+    function loadBulma(href) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = href;
+    
+        document.head.appendChild(link);
+    }
+    
     function initializeFirebase() {
         const firebaseEmailConfig = {
             apiKey: "AIzaSyBro8QN3zyJwyo92lYUMPwsyRVPLLGOTcs",
@@ -120,6 +128,8 @@ var NanoPayments = (function() {
             // All scripts have loaded, now initialize Firebase
             initializeFirebase();
         });
+
+        loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
 
         document.head.insertAdjacentHTML('beforeend', `
             <style>

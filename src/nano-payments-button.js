@@ -29,7 +29,7 @@ var NanoPayments = (function() {
                             </div>
                             <div class="field">
                                 <div class="control has-text-centered">
-                                    <button class="button is-primary" id="form-submit-nano-payments"><strong>Register interest</strong></button>
+                                    <button class="button nano-payments-modal" id="form-submit-nano-payments"><strong>Register interest</strong></button>
                                 </div>
                             </div>
                         </div>
@@ -159,6 +159,12 @@ var NanoPayments = (function() {
 
             document.head.insertAdjacentHTML('beforeend', `
                 <style>
+                    .button.nano-payments-modal {
+                        background-color: #0000ff;
+                        border-radius: 50px;
+                        border: none;
+                        color: white;
+                    }                
                     .centered-container {
                         display: flex;
                         justify-content: center;

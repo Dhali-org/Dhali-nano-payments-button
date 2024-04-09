@@ -88,7 +88,7 @@ var NanoPayments = (function() {
         subCollection.doc(_UUID).set(
             {
                 date: new Date(),
-            }
+            }, { merge: true }
         )
 
         let submitButtonEmails = document.getElementById("form-submit-nano-payments")

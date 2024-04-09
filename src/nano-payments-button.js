@@ -15,7 +15,7 @@ var NanoPayments = (function() {
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
-                <p class="modal-card-title">Get updates on nano-payment option</p>
+                <p class="modal-card-title">Get updates on crypto nano-payments</p>
                 <button class="delete" aria-label="close" id="close-modal-btn" onclick="NanoPayments.closeModal()"></button>
             </header>
             <section class="modal-card-body">

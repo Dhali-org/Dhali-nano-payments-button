@@ -93,33 +93,35 @@ var NanoPayments = (function() {
 
         let submitButtonEmails = document.getElementById("form-submit-nano-payments")
         submitButtonEmails.addEventListener("click", (e) => {
-            e.preventDefault()
-            let email = document.getElementById("email-nano-payments").value
-            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-            if (email.match(mailformat)) {
-                subCollection.doc(_UUID).update(
-                {
-                    email: email,
-                }
-            )
-            document.getElementById("email-nano-payments").value = ""
-            var x = document.getElementById("snackbar-success-nano-payments");
-
-            x.className = "show";
-
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+            e.preventDefault();
+            const email = document.getElementById("email-nano-payments").value;
+            const mailformat = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        
+            // Function to toggle snackbar visibility
+            function toggleSnackbar(isSuccess) {
+                const elementId = isSuccess ? "snackbar-success-nano-payments" : "snackbar-fail-nano-payments";
+                const snackbar = document.getElementById(elementId);
+                snackbar.className = "show";
+                setTimeout(() => {
+                    snackbar.className = snackbar.className.replace("show", "");
+                }, 3000);
             }
-            else {
-
-            var x = document.getElementById("snackbar-fail-nano-payments");
-
-            // Add the "show" class to DIV
-            x.className = "show";
-
-            // After 3 seconds, remove the show class from DIV
-            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        
+            if (mailformat.test(email)) {
+                subCollection.doc(_UUID).update({ email: email })
+                    .then(() => {
+                        document.getElementById("email-nano-payments").value = "";
+                        toggleSnackbar(true); // Display success snackbar
+                    })
+                    .catch(error => {
+                        console.error('Error updating document:', error);
+                        toggleSnackbar(false); // Display failure snackbar in case of an error
+                    });
+            } else {
+                toggleSnackbar(false); // Display failure snackbar if email format is incorrect
             }
-    })}
+        });
+        }
 
     function openModal() {
         initializeFirebase();

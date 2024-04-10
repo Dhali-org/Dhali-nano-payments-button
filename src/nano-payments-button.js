@@ -19,18 +19,16 @@ var NanoPayments = (function() {
                 <button class="delete" aria-label="close" id="close-modal-btn" onclick="NanoPayments.closeModal()"></button>
             </header>
             <section class="modal-card-body">
-                <div class="content-wrapper">
-                    <div class="columns is-centered">
-                        <div class="column is-10">
-                            <div class="field">
-                                <div class="control">
-                                    <input class="input is-large" name="email" type="email" id="email-nano-payments" placeholder="Enter your email address">
-                                </div>
+                <div class="columns is-centered">
+                    <div class="column is-10">
+                        <div class="field">
+                            <div class="control">
+                                <input class="input is-large" name="email" type="email" id="email-nano-payments" placeholder="Enter your email address">
                             </div>
-                            <div class="field">
-                                <div class="control has-text-centered">
-                                    <button class="button nano-payments-modal" id="form-submit-nano-payments">Submit</button>
-                                </div>
+                        </div>
+                        <div class="field">
+                            <div class="control has-text-centered">
+                                <button class="button nano-payments-modal" id="form-submit-nano-payments">Submit</button>
                             </div>
                         </div>
                     </div>

@@ -21,7 +21,7 @@ var NanoPayments = (function() {
             <section class="modal-card-body">
                 <div class="content-wrapper">
                     <div class="columns is-centered">
-                        <div class="column is-6">
+                        <div class="column is-10">
                             <div class="field">
                                 <div class="control">
                                     <input class="input is-large" name="email" type="email" id="email-nano-payments" placeholder="Enter your email address">

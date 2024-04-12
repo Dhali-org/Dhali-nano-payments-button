@@ -9,6 +9,7 @@ var NanoPayments = (function() {
 
     var _UUID = generateUUID();
     var _db;
+    var _subCollection;
 
     var htmlContent = `        
     <div class="modal" id="email-modal-nano-payments">
@@ -81,9 +82,9 @@ var NanoPayments = (function() {
             rootUrl = "default"
         }
         console.log("rootUrl: " + rootUrl)
-        const subCollection = collectionEmails.doc(rootUrl).collection("emails");
+        _subCollection = collectionEmails.doc(rootUrl).collection("emails");
 
-        subCollection.doc(_UUID).set(
+        _subCollection.doc(_UUID).set(
             {
                 date: new Date(),
             }, { merge: true }
@@ -106,7 +107,7 @@ var NanoPayments = (function() {
             }
         
             if (mailformat.test(email)) {
-                subCollection.doc(_UUID).update({ email: email })
+                _subCollection.doc(_UUID).update({ email: email }, { merge: true })
                     .then(() => {
                         document.getElementById("email-nano-payments").value = "";
                         toggleSnackbar(true); // Display success snackbar
@@ -122,7 +123,11 @@ var NanoPayments = (function() {
         }
 
     function openModal() {
-        initializeFirebase();
+        _subCollection.doc(_UUID).set(
+            {
+                clicked: true,
+            }, { merge: true }
+        )
         document.getElementById('email-modal-nano-payments').classList.add('is-active');
     }
 
@@ -151,6 +156,7 @@ var NanoPayments = (function() {
                 };
                 var _appEmail = firebase.initializeApp(_firebaseEmailConfig);
                 _db = firebase.firestore(_appEmail)
+                initializeFirebase();
             });
 
             loadBulma("https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css");
